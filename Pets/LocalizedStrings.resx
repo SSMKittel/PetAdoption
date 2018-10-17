@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="awl_age_adult" xml:space="preserve">
+    <value>Adult</value>
+  </data>
+  <data name="awl_age_senior" xml:space="preserve">
+    <value>Senior</value>
+  </data>
+  <data name="awl_age_young" xml:space="preserve">
+    <value>Young</value>
+  </data>
+  <data name="awl_lifestyle_high" xml:space="preserve">
+    <value>High Energy</value>
+  </data>
+  <data name="awl_lifestyle_low" xml:space="preserve">
+    <value>Low Energy</value>
+  </data>
+  <data name="awl_lifestyle_medium" xml:space="preserve">
+    <value>Medium Energy</value>
+  </data>
+  <data name="awl_location_AWL - Edinburgh North Shelter" xml:space="preserve">
+    <value>AWL - Edinburgh North Shelter</value>
+  </data>
+  <data name="awl_location_AWL - Wingfield Shelter" xml:space="preserve">
+    <value>AWL - Wingfield Shelter</value>
+  </data>
+  <data name="awl_location_For Pet's Sake" xml:space="preserve">
+    <value>For Pet's Sake</value>
+  </data>
+  <data name="awl_location_PETstock - Allenby Gardens" xml:space="preserve">
+    <value>PETstock - Allenby Gardens</value>
+  </data>
+  <data name="awl_location_PETstock - Melrose Park" xml:space="preserve">
+    <value>PETstock - Melrose Park</value>
+  </data>
+  <data name="awl_location_PETstock - Munno Para" xml:space="preserve">
+    <value>PETstock - Munno Para</value>
+  </data>
+  <data name="awl_location_PETstock - Noarlunga" xml:space="preserve">
+    <value>PETstock - Noarlunga</value>
+  </data>
+  <data name="awl_location_PETstock - Parafield" xml:space="preserve">
+    <value>PETstock - Parafield</value>
+  </data>
+  <data name="awl_sex_female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="awl_sex_male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="awl_size_large" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="awl_size_medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="awl_size_small" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="awl_status_adopted" xml:space="preserve">
+    <value>Adopted</value>
+  </data>
+  <data name="awl_status_available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="awl_status_gone" xml:space="preserve">
+    <value>Adopted</value>
+  </data>
+  <data name="awl_type_Cat" xml:space="preserve">
+    <value>Cat</value>
+  </data>
+  <data name="awl_type_Dog" xml:space="preserve">
+    <value>Dog</value>
+  </data>
+  <data name="awl_type_Rabbit" xml:space="preserve">
+    <value>Rabbit</value>
+  </data>
+  <data name="rspca_location_107" xml:space="preserve">
+    <value>Petbarn Hendon</value>
+  </data>
+  <data name="rspca_location_108" xml:space="preserve">
+    <value>Petbarn Mile End</value>
+  </data>
+  <data name="rspca_location_126" xml:space="preserve">
+    <value>Pet Universe Broadview</value>
+  </data>
+  <data name="rspca_location_127" xml:space="preserve">
+    <value>Semaphore Vet Clinic</value>
+  </data>
+  <data name="rspca_location_145" xml:space="preserve">
+    <value>Main North Road Vet Service</value>
+  </data>
+  <data name="rspca_location_149" xml:space="preserve">
+    <value>Adelaide Animal Hospital</value>
+  </data>
+  <data name="rspca_location_151" xml:space="preserve">
+    <value>Prospect Road Vet</value>
+  </data>
+  <data name="rspca_location_158" xml:space="preserve">
+    <value>Petbarn Noarlunga</value>
+  </data>
+  <data name="rspca_location_160" xml:space="preserve">
+    <value>Aldinga Vet Services</value>
+  </data>
+  <data name="rspca_location_161" xml:space="preserve">
+    <value>Hills Veterinary Centre</value>
+  </data>
+  <data name="rspca_location_165" xml:space="preserve">
+    <value>Petbarn Prospect</value>
+  </data>
+  <data name="rspca_location_178" xml:space="preserve">
+    <value>Petbarn Holden Hill</value>
+  </data>
+  <data name="rspca_location_186" xml:space="preserve">
+    <value>Petbarn Elizabeth</value>
+  </data>
+  <data name="rspca_location_187" xml:space="preserve">
+    <value>Petbarn Norwood</value>
+  </data>
+  <data name="rspca_location_198" xml:space="preserve">
+    <value>Petbarn Melrose Park</value>
+  </data>
+  <data name="rspca_location_21" xml:space="preserve">
+    <value>Lonsdale Shelter</value>
+  </data>
+  <data name="rspca_location_22" xml:space="preserve">
+    <value>Whyalla Shelter</value>
+  </data>
+  <data name="rspca_location_23" xml:space="preserve">
+    <value>Port Lincoln Shelter</value>
+  </data>
+  <data name="rspca_status_3" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="rspca_status_gone" xml:space="preserve">
+    <value>Adopted</value>
+  </data>
+  <data name="rspca_type_1" xml:space="preserve">
+    <value>Bird</value>
+  </data>
+  <data name="rspca_type_14" xml:space="preserve">
+    <value>Horse</value>
+  </data>
+  <data name="rspca_type_15" xml:space="preserve">
+    <value>Kitten</value>
+  </data>
+  <data name="rspca_type_16" xml:space="preserve">
+    <value>Puppy</value>
+  </data>
+  <data name="rspca_type_18" xml:space="preserve">
+    <value>Cattle</value>
+  </data>
+  <data name="rspca_type_19" xml:space="preserve">
+    <value>Sheep</value>
+  </data>
+  <data name="rspca_type_2" xml:space="preserve">
+    <value>Cat</value>
+  </data>
+  <data name="rspca_type_21" xml:space="preserve">
+    <value>Goat</value>
+  </data>
+  <data name="rspca_type_3" xml:space="preserve">
+    <value>Dog</value>
+  </data>
+  <data name="rspca_type_4" xml:space="preserve">
+    <value>Fowl</value>
+  </data>
+  <data name="rspca_type_73" xml:space="preserve">
+    <value>Rodent</value>
+  </data>
+  <data name="rspca_type_74" xml:space="preserve">
+    <value>Pig</value>
+  </data>
+  <data name="rspca_type_76" xml:space="preserve">
+    <value>Farm</value>
+  </data>
+  <data name="rspca_type_79" xml:space="preserve">
+    <value>Reptile</value>
+  </data>
+  <data name="rspca_type_83" xml:space="preserve">
+    <value>Crab/Fish</value>
+  </data>
+  <data name="rspca_type_84" xml:space="preserve">
+    <value>Amphibian</value>
+  </data>
+  <data name="rspca_type_85" xml:space="preserve">
+    <value>Guinea Pig</value>
+  </data>
+  <data name="rspca_type_86" xml:space="preserve">
+    <value>Rabbit</value>
+  </data>
+  <data name="rspca_type_93" xml:space="preserve">
+    <value>Ferret</value>
+  </data>
+  <data name="rspca_type_98" xml:space="preserve">
+    <value>Bird</value>
+  </data>
+</root>

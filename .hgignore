@@ -1,0 +1,8 @@
+syntax: glob
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+bin/
+obj/
