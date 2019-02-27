@@ -9,11 +9,11 @@ namespace Pets
 {
     public class PetService
     {
-        private readonly IPetRepository petRepository;
+        private readonly IPets petRepository;
         private readonly AwlService awlService;
         private readonly RspcaService rspcaService;
 
-        public PetService(IPetRepository repo)
+        public PetService(IPets repo)
         {
             if (repo == null) throw new ArgumentNullException();
             this.petRepository = repo;

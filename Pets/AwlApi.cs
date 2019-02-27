@@ -19,14 +19,13 @@ namespace Pets
 
         private static readonly LocalizedString GONE = new LocalizedString("awl_status_gone");
 
-        private readonly IPetRepository petRepository;
+        private readonly IPets allPets;
         private readonly HttpClient client = new HttpClient();
         private readonly Regex getToken = new Regex("\"token\":\"([^'\"]+)\"", RegexOptions.Singleline);
 
-        public AwlService(IPetRepository repo)
+        public AwlService(IPets allPets)
         {
-            if (repo == null) throw new ArgumentNullException();
-            this.petRepository = repo;
+            this.allPets = allPets ?? throw new ArgumentNullException();
             client.Timeout = TimeSpan.FromSeconds(60);
             client.BaseAddress = new Uri("https://awl.org.au/");
         }
@@ -65,26 +64,27 @@ namespace Pets
         [MethodImplAttribute(MethodImplOptions.Synchronized)]
         private void updateAwlPets(AwlApi api)
         {
-            HashSet<string> found = new HashSet<string>();
+            HashSet<Id> found = new HashSet<Id>();
             foreach (AwlPet p in api.data)
             {
-                found.Add(p.unique_id);
+                Id id = new Id(ORIGIN, p.unique_id);
+                found.Add(id);
 
-                Pet pet = petRepository.Get(ORIGIN, p.unique_id);
+                Pet pet = allPets.Get(id);
                 if (pet == null)
                 {
-                    pet = p.create();
-                    petRepository.Add(pet);
+                    pet = p.Create();
+                    allPets.Add(pet);
                 }
                 else
                 {
-                    p.update(pet);
+                    p.Update(pet);
                 }
             }
 
-            foreach (Pet pet in petRepository.Get(ORIGIN).Where(p => !found.Contains(p.OriginId)))
+            foreach (Pet pet in allPets.GetAll().Where(p => p.Id.Origin == ORIGIN && !found.Contains(p.Id)))
             {
-                pet.ChangeStatus(GONE);
+                pet.Status = Status.Adopted;
             }
         }
     }
@@ -132,51 +132,58 @@ namespace Pets
         [DataMember(IsRequired = false)] public List<string> images { get; set; }
         [DataMember(IsRequired = false)] public string url { get; set; }
 
-        public Pet create()
+        public Pet Create()
         {
-            Pet p = new Pet(AwlService.ORIGIN, unique_id, loc("location", location), loc("status", status), loc("type", type), name, loc("sex", gender), breed, breed_secondary);
-            p.ChangeAge(age_actual);
-            p.ChangeLifestyle(loc("lifestyle", lifestyle));
-            p.ChangeTraining(loc("training", training));
-            p.ChangeUrl(url);
-            p.ChangeOtherAnimals(animalHandling());
+            Pet p = new Pet(AwlService.ORIGIN, unique_id);
+            Update(p);
             return p;
         }
 
-        public void update(Pet pet)
+        public void Update(Pet pet)
         {
-            pet.Rename(name);
-            pet.CorrectType(loc("type", type));
-            pet.CorrectSex(loc("sex", gender));
-            pet.CorrectBreed(breed, breed_secondary);
-            pet.ChangeAge(age_actual);
-            pet.ChangeLifestyle(loc("lifestyle", lifestyle));
-            pet.ChangeTraining(loc("training", training));
-            pet.ChangeUrl(url);
-            pet.ChangeOtherAnimals(animalHandling());
-            pet.ChangeStatus(loc("status", status));
+            pet.Name = name;
+            pet.Location = loc("location", location).ToString();
+            pet.Type = loc("type", type).ToString();
+            pet.Sex = PetUtils.ParseSex(gender);
+            pet.Breed = breed;
+            pet.BreedSecondary = breed_secondary;
+            pet.Age = age_actual;
+            pet.Lifestyle = lifestyle;
+            pet.Training = loc("training", training).ToString();
+            pet.Status = PetUtils.ParseStatus(status);
+
+            var actualAnimals = animalHandling();
+            var currentAnimals = pet.OtherAnimals;
+            foreach (string animal in currentAnimals.Except(actualAnimals))
+            {
+                pet.RemoveOtherAnimal(animal);
+            }
+            foreach (string animal in actualAnimals.Except(currentAnimals))
+            {
+                pet.AddOtherAnimal(animal);
+            }
         }
 
-        private List<LocalizedString> animalHandling()
+        private SortedSet<string> animalHandling()
         {
-            List<LocalizedString> animals = new List<LocalizedString>();
+            SortedSet<string> animals = new SortedSet<string>();
             if (traits != null)
             {
                 if (traits.other_cats != null && traits.other_cats != string.Empty)
                 {
-                    animals.Add(loc("other_cats", traits.other_cats));
+                    animals.Add(loc("other_cats", traits.other_cats).ToString());
                 }
                 if (traits.other_dogs != null && traits.other_dogs != string.Empty)
                 {
-                    animals.Add(loc("other_dogs", traits.other_dogs));
+                    animals.Add(loc("other_dogs", traits.other_dogs).ToString());
                 }
                 if (traits.other_rabbits != null && traits.other_rabbits != string.Empty)
                 {
-                    animals.Add(loc("other_rabbits", traits.other_rabbits));
+                    animals.Add(loc("other_rabbits", traits.other_rabbits).ToString());
                 }
                 if (traits.other_animals != null && traits.other_animals != string.Empty)
                 {
-                    animals.Add(loc("other_animals", traits.other_animals));
+                    animals.Add(loc("other_animals", traits.other_animals).ToString());
                 }
             }
             return animals;

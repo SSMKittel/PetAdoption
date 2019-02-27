@@ -126,15 +126,6 @@
   <data name="awl_age_young" xml:space="preserve">
     <value>Young</value>
   </data>
-  <data name="awl_lifestyle_high" xml:space="preserve">
-    <value>High Energy</value>
-  </data>
-  <data name="awl_lifestyle_low" xml:space="preserve">
-    <value>Low Energy</value>
-  </data>
-  <data name="awl_lifestyle_medium" xml:space="preserve">
-    <value>Medium Energy</value>
-  </data>
   <data name="awl_location_AWL - Edinburgh North Shelter" xml:space="preserve">
     <value>AWL - Edinburgh North Shelter</value>
   </data>
@@ -182,6 +173,9 @@
   </data>
   <data name="awl_status_gone" xml:space="preserve">
     <value>Adopted</value>
+  </data>
+  <data name="awl_training_null" xml:space="preserve">
+    <value>No Training</value>
   </data>
   <data name="awl_type_Cat" xml:space="preserve">
     <value>Cat</value>
