@@ -36,7 +36,7 @@ namespace Pets
         private const string LOCATION_SEMAPHORE_VET_CLINIC = "127";
         private const string LOCATION_WHYALLA_SHELTER = "22";
 
-        private static readonly LocalizedString GONE = new LocalizedString("rspca_status_gone");
+        private const string STATUS_AVAILABLE = "3";
 
         private readonly IPets allPets;
         private readonly HttpClient client = new HttpClient();
@@ -257,7 +257,16 @@ namespace Pets
             pet.Age = formattedAge();
             pet.Lifestyle = "Unknown";
             pet.Training = "Unknown";
-            pet.Status = PetUtils.ParseStatus(animal_status);
+            pet.Status = parseStatus();
+        }
+
+        private Status parseStatus()
+        {
+            if (animal_status == "3")
+            {
+                return Status.Available;
+            }
+            return Status.Unspecified;
         }
 
         private string formattedAge()

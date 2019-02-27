@@ -150,7 +150,7 @@ namespace Pets
             pet.Age = age_actual;
             pet.Lifestyle = lifestyle;
             pet.Training = loc("training", training).ToString();
-            pet.Status = PetUtils.ParseStatus(status);
+            pet.Status = parseStatus();
 
             var actualAnimals = animalHandling();
             var currentAnimals = pet.OtherAnimals;
@@ -161,6 +161,26 @@ namespace Pets
             foreach (string animal in actualAnimals.Except(currentAnimals))
             {
                 pet.AddOtherAnimal(animal);
+            }
+        }
+
+        private Status parseStatus()
+        {
+            if (status == "Adopted" || status == "adopted")
+            {
+                return Status.Adopted;
+            }
+            else if (status == "Available" || status == "available")
+            {
+                return Status.Available;
+            }
+            else if (status == "Hold" || status == "hold")
+            {
+                return Status.Hold;
+            }
+            else
+            {
+                return Status.Unspecified;
             }
         }
 
