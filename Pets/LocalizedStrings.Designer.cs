@@ -19,7 +19,7 @@ namespace Pets {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class LocalizedStrings {
@@ -84,33 +84,6 @@ namespace Pets {
         internal static string awl_age_young {
             get {
                 return ResourceManager.GetString("awl_age_young", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to High Energy.
-        /// </summary>
-        internal static string awl_lifestyle_high {
-            get {
-                return ResourceManager.GetString("awl_lifestyle_high", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Low Energy.
-        /// </summary>
-        internal static string awl_lifestyle_low {
-            get {
-                return ResourceManager.GetString("awl_lifestyle_low", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Medium Energy.
-        /// </summary>
-        internal static string awl_lifestyle_medium {
-            get {
-                return ResourceManager.GetString("awl_lifestyle_medium", resourceCulture);
             }
         }
         
@@ -255,6 +228,15 @@ namespace Pets {
         internal static string awl_status_gone {
             get {
                 return ResourceManager.GetString("awl_status_gone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Training.
+        /// </summary>
+        internal static string awl_training_null {
+            get {
+                return ResourceManager.GetString("awl_training_null", resourceCulture);
             }
         }
         

@@ -79,8 +79,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MemoryPetRepository.cs" />
-    <Compile Include="PersistentPetRepository.cs" />
+    <Compile Include="MemoryPets.cs" />
+    <Compile Include="PersistentPets.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

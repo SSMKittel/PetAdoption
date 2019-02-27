@@ -38,14 +38,13 @@ namespace Pets
 
         private static readonly LocalizedString GONE = new LocalizedString("rspca_status_gone");
 
-        private readonly IPetRepository petRepository;
+        private readonly IPets allPets;
         private readonly HttpClient client = new HttpClient();
         private readonly Regex getPets = new Regex(@"init_animals\s*=\s*(\[.*?\]);\s*var\s+init_recent_animals_listing", RegexOptions.Singleline);
 
-        public RspcaService(IPetRepository repo)
+        public RspcaService(IPets allPets)
         {
-            if (repo == null) throw new ArgumentNullException();
-            this.petRepository = repo;
+            this.allPets = allPets ?? throw new ArgumentNullException();
             client.Timeout = TimeSpan.FromSeconds(60);
             client.BaseAddress = new Uri("https://www.adoptapet.com.au/");
         }
@@ -70,16 +69,17 @@ namespace Pets
         [MethodImplAttribute(MethodImplOptions.Synchronized)]
         private void updateRspcaPets(IEnumerable<RspcaPet> api)
         {
-            HashSet<string> found = new HashSet<string>();
+            HashSet<Id> found = new HashSet<Id>();
             foreach (RspcaPet p in api.Where(shelterAllowed))
             {
-                found.Add(p.api_id);
+                Id id = new Id(ORIGIN, p.api_id);
+                found.Add(id);
 
-                Pet pet = petRepository.Get(ORIGIN, p.api_id);
+                Pet pet = allPets.Get(id);
                 if (pet == null)
                 {
                     pet = p.Create();
-                    petRepository.Add(pet);
+                    allPets.Add(pet);
                 }
                 else
                 {
@@ -87,9 +87,9 @@ namespace Pets
                 }
             }
 
-            foreach (Pet pet in petRepository.Get(ORIGIN).Where(p => !found.Contains(p.OriginId)))
+            foreach (Pet pet in allPets.GetAll().Where(p => p.Id.Origin == ORIGIN && !found.Contains(p.Id)))
             {
-                pet.ChangeStatus(GONE);
+                pet.Status = Status.Adopted;
             }
         }
 
@@ -235,12 +235,8 @@ namespace Pets
                 Trace.WriteLine(this);
                 Trace.WriteLine(this.public_url);
             }
-            Pet p = new Pet(RspcaService.ORIGIN, api_id, loc("location", shelter), loc("status", animal_status), loc("type", animal_type), toUnknown(name), loc("sex", sex), breedPrimary, breedSecondary);
-            p.ChangeAge(formattedAge());
-            p.ChangeLifestyle(loc("lifestyle", null));
-            p.ChangeTraining(loc("training", null));
-            p.ChangeUrl(public_url);
-            p.ChangeOtherAnimals(Enumerable.Empty<LocalizedString>());
+            Pet p = new Pet(RspcaService.ORIGIN, api_id);
+            Update(p);
             return p;
         }
 
@@ -252,15 +248,16 @@ namespace Pets
         
         public void Update(Pet pet)
         {
-            pet.Rename(toUnknown(name));
-            pet.CorrectSex(loc("sex", sex));
-            pet.CorrectBreed(breedPrimary, breedSecondary);
-            pet.ChangeAge(formattedAge());
-            pet.ChangeLifestyle(loc("lifestyle", null));
-            pet.ChangeTraining(loc("training", null));
-            pet.ChangeUrl(public_url);
-            pet.ChangeOtherAnimals(Enumerable.Empty<LocalizedString>());
-            pet.ChangeStatus(loc("status", animal_status));
+            pet.Name = name;
+            pet.Location = loc("location", shelter).ToString();
+            pet.Type = loc("type", animal_type).ToString();
+            pet.Sex = PetUtils.ParseSex(sex);
+            pet.Breed = breedPrimary;
+            pet.BreedSecondary = breedSecondary;
+            pet.Age = formattedAge();
+            pet.Lifestyle = "Unknown";
+            pet.Training = "Unknown";
+            pet.Status = PetUtils.ParseStatus(animal_status);
         }
 
         private string formattedAge()

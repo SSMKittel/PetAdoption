@@ -20,17 +20,17 @@ namespace Pets
 {
     public partial class MainWindow : Window
     {
-        private readonly IPetRepository petRepository;
+        private readonly IPets allPets;
         private readonly PetService petService;
 
-        private static readonly LocalizedString TYPE_AWL_CAT = new LocalizedString("awl_type_Cat");
-        private static readonly LocalizedString TYPE_RSPCA_CAT = new LocalizedString("rspca_type_2");
-        private static readonly LocalizedString TYPE_RSPCA_KITTEN = new LocalizedString("rspca_type_15");
-        private static readonly LocalizedString TYPE_AWL_RABBIT = new LocalizedString("awl_type_Rabbit");
-        private static readonly LocalizedString TYPE_RSPCA_RABBIT = new LocalizedString("rspca_type_86");
-        private static readonly LocalizedString TYPE_AWL_DOG = new LocalizedString("awl_type_Dog");
-        private static readonly LocalizedString TYPE_RSPCA_DOG = new LocalizedString("rspca_type_3");
-        private static readonly LocalizedString TYPE_RSPCA_PUPPY = new LocalizedString("rspca_type_16");
+        private static readonly string TYPE_AWL_CAT = new LocalizedString("awl_type_Cat").ToString();
+        private static readonly string TYPE_RSPCA_CAT = new LocalizedString("rspca_type_2").ToString();
+        private static readonly string TYPE_RSPCA_KITTEN = new LocalizedString("rspca_type_15").ToString();
+        private static readonly string TYPE_AWL_RABBIT = new LocalizedString("awl_type_Rabbit").ToString();
+        private static readonly string TYPE_RSPCA_RABBIT = new LocalizedString("rspca_type_86").ToString();
+        private static readonly string TYPE_AWL_DOG = new LocalizedString("awl_type_Dog").ToString();
+        private static readonly string TYPE_RSPCA_DOG = new LocalizedString("rspca_type_3").ToString();
+        private static readonly string TYPE_RSPCA_PUPPY = new LocalizedString("rspca_type_16").ToString();
 
         private const double INITIAL_DURATION = 1000 * 1 * 60;
         private const double AUTO_UPDATE_DURATION = 1000 * 1 * 60 * 60;
@@ -39,8 +39,8 @@ namespace Pets
 
         public MainWindow()
         {
-            petRepository = new PersistentPetRepository();
-            petService = new PetService(petRepository);
+            allPets = new PersistentPets();
+            petService = new PetService(allPets);
             InitializeComponent();
             listView.ItemsSource = getPetList();
 
@@ -55,32 +55,17 @@ namespace Pets
             this.Dispatcher.Invoke(() => ButtonClick(sender, default(RoutedEventArgs)));
         }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        private async void ButtonClick(object sender, RoutedEventArgs e)
         {
             updateTimer.Stop();
             updateTimer.Interval = AUTO_UPDATE_DURATION;
 
             button.IsEnabled = false;
-            petService.Update()
-                .ContinueWith(dispatchUpdatedDateTime)
-                .ContinueWith(dispatchUpdateListView)
-                .ContinueWith(dispatchEnableUpdate)
-                .ContinueWith(x => { updateTimer.Stop(); updateTimer.Start(); });
-        }
-
-        private void dispatchUpdateListView(Task previous)
-        {
-            this.Dispatcher.Invoke(updateListView);
-        }
-
-        private void dispatchUpdatedDateTime(Task previous)
-        {
+            await petService.Update();
             this.Dispatcher.Invoke(() => { if (lastUpdated != null) lastUpdated.Content = DateTime.Now; });
-        }
-
-        private void dispatchEnableUpdate(Task previous)
-        {
+            this.Dispatcher.Invoke(updateListView);
             this.Dispatcher.Invoke(() => button.IsEnabled = true);
+            updateTimer.Start();
         }
 
         private void updateListView()
@@ -92,7 +77,7 @@ namespace Pets
 
         private IEnumerable<Pet> getPetList()
         {
-            IEnumerable<Pet> pets = petRepository.Get();
+            IEnumerable<Pet> pets = allPets.GetAll();
             if (shouldRemove(typeCat))
             {
                 pets = pets.Where(notCat);
