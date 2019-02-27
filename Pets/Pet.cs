@@ -26,25 +26,7 @@ namespace Pets
             }
         }
 
-        internal static Status ParseStatus(string str)
-        {
-            if (str == "Adopted" || str == "adopted")
-            {
-                return Status.Adopted;
-            }
-            else if (str == "Available" || str == "available")
-            {
-                return Status.Available;
-            }
-            else if (str == "Hold" || str == "hold")
-            {
-                return Status.Hold;
-            }
-            else
-            {
-                return Status.Unspecified;
-            }
-        }
+
     }
 
     public interface IPets
