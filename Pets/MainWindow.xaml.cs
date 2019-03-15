@@ -42,7 +42,9 @@ namespace Pets
             allPets = new PersistentPets();
             petService = new PetService(allPets);
             InitializeComponent();
-            listView.ItemsSource = getPetList();
+
+            DataContext = new Model();
+            listView.ItemsSource = GetFilteredPets();
 
             updateTimer = new Timer(INITIAL_DURATION);
             updateTimer.Elapsed += fireTimer;
@@ -70,79 +72,52 @@ namespace Pets
 
         private void updateListView()
         {
-            listView.ItemsSource = getPetList();
+            listView.ItemsSource = GetFilteredPets();
             listView.InvalidateVisual();
             if(lastUpdated != null) lastUpdated.InvalidateVisual();
         }
 
-        private List<Pet> getPetList()
+        private IList<Pet> GetFilteredPets()
         {
+            Model m = (Model)DataContext;
             IEnumerable<Pet> pets = allPets.GetAll();
-            if (shouldRemove(typeCat))
+            if (!m.Cat)
             {
                 pets = pets.Where(notCat);
             }
-            if (shouldRemove(typeRabbit))
+            if (!m.Rabbit)
             {
                 pets = pets.Where(notRabbit);
             }
-            if (shouldRemove(typeDog))
+            if (!m.Dog)
             {
                 pets = pets.Where(notDog);
             }
-            if (shouldRemove(typeOther))
+            if (!m.Other)
             {
                 pets = pets.Where(notOther);
             }
             return pets.OrderBy(x => x.LastChanged).ThenBy(x => x.Name).ThenBy(x => x.Id).ToList();
         }
 
-        private static bool isCat(Pet pet)
-        {
-            return pet.Type == TYPE_AWL_CAT || pet.Type == TYPE_RSPCA_CAT || pet.Type == TYPE_RSPCA_KITTEN;
-        }
-
         private static bool notCat(Pet pet)
         {
-            return !isCat(pet);
-        }
-
-        private static bool isDog(Pet pet)
-        {
-            return pet.Type == TYPE_AWL_DOG || pet.Type == TYPE_RSPCA_DOG || pet.Type == TYPE_RSPCA_PUPPY;
+            return !(pet.Type == TYPE_AWL_CAT || pet.Type == TYPE_RSPCA_CAT || pet.Type == TYPE_RSPCA_KITTEN);
         }
 
         private static bool notDog(Pet pet)
         {
-            return !isDog(pet);
-        }
-
-        private static bool isRabbit(Pet pet)
-        {
-            return pet.Type == TYPE_AWL_RABBIT || pet.Type == TYPE_RSPCA_RABBIT;
+            return !(pet.Type == TYPE_AWL_DOG || pet.Type == TYPE_RSPCA_DOG || pet.Type == TYPE_RSPCA_PUPPY);
         }
 
         private static bool notRabbit(Pet pet)
         {
-            return !isRabbit(pet);
-        }
-
-        private static bool isOther(Pet pet)
-        {
-            return notCat(pet) && notDog(pet) && notRabbit(pet);
+            return !(pet.Type == TYPE_AWL_RABBIT || pet.Type == TYPE_RSPCA_RABBIT);
         }
 
         private static bool notOther(Pet pet)
         {
-            return !isOther(pet);
-        }
-
-        private static bool shouldRemove(CheckBox cb)
-        {
-            if(cb == null) return true;
-            bool? val = cb.IsChecked;
-            if (!val.HasValue) return true;
-            return !val.Value;
+            return !(notCat(pet) && notDog(pet) && notRabbit(pet));
         }
 
         private void typeChecked(object sender, RoutedEventArgs e)
