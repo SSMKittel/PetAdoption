@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pets"
         mc:Ignorable="d"
-        Title="Pets" Height="768" Width="Auto">
+        Title="Pets" Height="768" Width="Auto"
+        x:Name="mainWindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="376*"/>
@@ -21,15 +22,15 @@
                 <DataGridTextColumn Header="Breed2" Binding="{Binding BreedSecondary}" Width="Auto" />
                 <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="Auto" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto" />
-                <DataGridTextColumn Header="Updated" Binding="{Binding LastChanged, StringFormat=dd/MM/yy hh:mm:ss tt}" SortDirection="Ascending" Width="Auto" />
+                <DataGridTextColumn Header="Updated" Binding="{Binding LastChanged, StringFormat=dd/MM/yy hh:mm:ss tt}" Width="Auto" />
                 <DataGridTextColumn Header="Org" Binding="{Binding Id.Origin}" Width="Auto" />
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
-        <CheckBox x:Name="typeDog" Content="Dog" HorizontalAlignment="Left" Margin="97,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>
-        <CheckBox x:Name="typeCat" Content="Cat" HorizontalAlignment="Left" Margin="145,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>
-        <CheckBox x:Name="typeRabbit" Content="Rabbit" HorizontalAlignment="Left" Margin="187,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>
-        <CheckBox x:Name="typeOther" Content="Other" HorizontalAlignment="Left" Margin="245,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>
+        <CheckBox x:Name="typeDog" Content="Dog" HorizontalAlignment="Left" Margin="97,13,0,0" VerticalAlignment="Top" IsChecked="{Binding Dog}" Checked="typeChecked" Unchecked="typeChecked"/>
+        <CheckBox x:Name="typeCat" Content="Cat" HorizontalAlignment="Left" Margin="145,13,0,0" VerticalAlignment="Top" IsChecked="{Binding Cat}" Checked="typeChecked" Unchecked="typeChecked"/>
+        <CheckBox x:Name="typeRabbit" Content="Rabbit" HorizontalAlignment="Left" Margin="187,13,0,0" VerticalAlignment="Top" IsChecked="{Binding Rabbit}" Checked="typeChecked" Unchecked="typeChecked"/>
+        <CheckBox x:Name="typeOther" Content="Other" HorizontalAlignment="Left" Margin="245,13,0,0" VerticalAlignment="Top" IsChecked="{Binding Other}" Checked="typeChecked" Unchecked="typeChecked"/>
         <Label x:Name="label" Content="Last Update:" HorizontalAlignment="Left" Margin="338,7,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lastUpdated" Content="Unknown" HorizontalAlignment="Left" Margin="414,7,0,0" VerticalAlignment="Top"/>
 
