@@ -5,25 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pets"
         mc:Ignorable="d"
-        Title="Pets" Height="768" Width="1024">
+        Title="Pets" Height="768" Width="Auto">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="376*"/>
+            <RowDefinition Height="361*"/>
+        </Grid.RowDefinitions>
         <Button x:Name="button" Content="Update" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ButtonClick"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="692" Margin="10,35,0,0" VerticalAlignment="Top" Width="996">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Lifestyle" DisplayMemberBinding="{Binding Path=Lifestyle}" />
-                    <GridViewColumn Header="Breed" DisplayMemberBinding="{Binding Path=Breed}" />
-                    <GridViewColumn Header="Breed2" DisplayMemberBinding="{Binding Path=BreedSecondary}" />
-                    <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Path=Age}" />
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}" />
-                    <GridViewColumn Header="Updated" DisplayMemberBinding="{Binding Path=LastChanged, StringFormat=dd/MM/yy hh:mm:ss tt}" />
-                    <GridViewColumn Header="Org" DisplayMemberBinding="{Binding Path=Origin}" />
-                    <GridViewColumn Header="Location" DisplayMemberBinding="{Binding Path=Location}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid x:Name="listView" IsReadOnly="True" Margin="10,38,10,15" AutoGenerateColumns="False" Grid.RowSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="Auto" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="Auto" />
+                <DataGridTextColumn Header="Lifestyle" Binding="{Binding Lifestyle}" Width="Auto" />
+                <DataGridTextColumn Header="Breed" Binding="{Binding Breed}" Width="Auto" />
+                <DataGridTextColumn Header="Breed2" Binding="{Binding BreedSecondary}" Width="Auto" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="Auto" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto" />
+                <DataGridTextColumn Header="Updated" Binding="{Binding LastChanged, StringFormat=dd/MM/yy hh:mm:ss tt}" SortDirection="Ascending" Width="Auto" />
+                <DataGridTextColumn Header="Org" Binding="{Binding Id.Origin}" Width="Auto" />
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
         <CheckBox x:Name="typeDog" Content="Dog" HorizontalAlignment="Left" Margin="97,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>
         <CheckBox x:Name="typeCat" Content="Cat" HorizontalAlignment="Left" Margin="145,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>
         <CheckBox x:Name="typeRabbit" Content="Rabbit" HorizontalAlignment="Left" Margin="187,13,0,0" VerticalAlignment="Top" IsChecked="True" Checked="typeChecked" Unchecked="typeChecked"/>

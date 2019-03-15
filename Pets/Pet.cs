@@ -25,8 +25,6 @@ namespace Pets
                 return Sex.Unspecified;
             }
         }
-
-
     }
 
     public interface IPets
@@ -54,15 +52,25 @@ namespace Pets
 
     public struct Id : IComparable<Id>
     {
-        public readonly string Origin;
-        public readonly string OriginId;
+        public readonly string origin;
+        public readonly string originId;
+
+        public string Origin
+        {
+            get { return origin; }
+        }
+
+        public string OriginId
+        {
+            get { return originId; }
+        }
 
         public Id(string origin, string originId)
         {
             if (origin == null || origin == string.Empty) throw new ArgumentNullException("origin");
             if (originId == null || originId == string.Empty) throw new ArgumentNullException("originId");
-            this.Origin = origin;
-            this.OriginId = originId;
+            this.origin = origin;
+            this.originId = originId;
         }
 
         public int CompareTo(Id other)
@@ -78,7 +86,8 @@ namespace Pets
 
     public class Pet
     {
-        public readonly Id Id;
+        public readonly Id id;
+        public Id Id { get { return id; } }
         public DateTime LastChanged { get; set; }
 
         private string location;
@@ -262,7 +271,7 @@ namespace Pets
 
         public Pet(Id id)
         {
-            this.Id = id;
+            this.id = id;
         }
     }
 }

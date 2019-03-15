@@ -75,7 +75,7 @@ namespace Pets
             if(lastUpdated != null) lastUpdated.InvalidateVisual();
         }
 
-        private IEnumerable<Pet> getPetList()
+        private List<Pet> getPetList()
         {
             IEnumerable<Pet> pets = allPets.GetAll();
             if (shouldRemove(typeCat))
@@ -94,7 +94,7 @@ namespace Pets
             {
                 pets = pets.Where(notOther);
             }
-            return pets.OrderByDescending(x => x.LastChanged).ThenBy(x => x.Name).ThenBy(x => x.Id);
+            return pets.OrderBy(x => x.LastChanged).ThenBy(x => x.Name).ThenBy(x => x.Id).ToList();
         }
 
         private static bool isCat(Pet pet)
