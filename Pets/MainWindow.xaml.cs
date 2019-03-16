@@ -43,8 +43,9 @@ namespace Pets
             petService = new PetService(allPets);
             InitializeComponent();
 
-            DataContext = new Model();
-            listView.ItemsSource = GetFilteredPets();
+            var m = new Model();
+            DataContext = m;
+            m.Pets = GetFilteredPets();
 
             updateTimer = new Timer(INITIAL_DURATION);
             updateTimer.Elapsed += fireTimer;
@@ -64,7 +65,7 @@ namespace Pets
 
             button.IsEnabled = false;
             await petService.Update();
-            this.Dispatcher.Invoke(() => { if (lastUpdated != null) lastUpdated.Content = DateTime.Now; });
+            this.Dispatcher.Invoke(() => ((Model)DataContext).LastUpdated = DateTime.Now);
             this.Dispatcher.Invoke(updateListView);
             this.Dispatcher.Invoke(() => button.IsEnabled = true);
             updateTimer.Start();
@@ -72,9 +73,8 @@ namespace Pets
 
         private void updateListView()
         {
-            listView.ItemsSource = GetFilteredPets();
-            listView.InvalidateVisual();
-            if(lastUpdated != null) lastUpdated.InvalidateVisual();
+            Model m = (Model)DataContext;
+            m.Pets = GetFilteredPets();
         }
 
         private IList<Pet> GetFilteredPets()
