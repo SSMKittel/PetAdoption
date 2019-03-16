@@ -43,9 +43,7 @@ namespace Pets
             petService = new PetService(allPets);
             InitializeComponent();
 
-            var m = new Model();
-            DataContext = m;
-            m.Pets = GetFilteredPets();
+            ((Model)DataContext).Pets = GetFilteredPets();
 
             updateTimer = new Timer(INITIAL_DURATION);
             updateTimer.Elapsed += fireTimer;
