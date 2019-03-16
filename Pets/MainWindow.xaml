@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Pets" Height="768" Width="Auto"
         x:Name="mainWindow">
+    <Window.DataContext>
+        <local:Model />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="376*"/>
